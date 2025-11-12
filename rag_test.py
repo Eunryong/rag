@@ -1,4 +1,4 @@
-from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain_ollama import OllamaEmbeddings, OllamaLLM
@@ -8,6 +8,7 @@ from langchain_core.runnables import RunnablePassthrough
 from dotenv import load_dotenv
 import re
 import json
+import os
 load_dotenv()
 
 
@@ -29,7 +30,11 @@ def clean_text(text):
 
 
 def load_documents():
-    loader = PyPDFLoader("sample.pdf")
+    loader = DirectoryLoader(
+        "data/",
+        glob="**/*.pdf",
+        loader_cls=PyPDFLoader
+    )
     documents = loader.load()
     for doc in documents:
         doc.page_content = clean_text(doc.page_content)
