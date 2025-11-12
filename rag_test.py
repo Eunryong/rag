@@ -59,7 +59,6 @@ def save_documents(documents, output_path):
 
 
 def main():
-    text = input("무엇을 도와드릴까요? : ")
     documents = load_documents()
     chunked_documents = chunk_doc(documents)
     save_documents(chunked_documents, 'tmp.jsonl')
