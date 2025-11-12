@@ -1,0 +1,6 @@
+.venv/
+.env
+tmp.txt
+tmp.jsonl
+sample.pdf
+chroma_db/
